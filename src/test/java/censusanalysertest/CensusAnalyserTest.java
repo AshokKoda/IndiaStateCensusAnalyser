@@ -25,7 +25,7 @@ public class CensusAnalyserTest {
 	}
 	
 	@Test
-	public void csvFileIncorrect() throws IOException {
+	public void incorrectCsvFilename() throws IOException {
 		CensusAnalyser censusAnalyser = new CensusAnalyser();
 		try {
 			int numOfRecords = censusAnalyser.loadCensusData("D:\\Eclipse Java Projects\\New-Workspace\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData1.csv");
