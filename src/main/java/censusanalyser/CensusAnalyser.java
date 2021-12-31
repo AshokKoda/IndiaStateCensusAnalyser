@@ -36,31 +36,31 @@ public class CensusAnalyser {
 		}
 	}
 	
-	public int readData(String csvPath) throws CensusAnalyserException {
-
-		List<IndiaCensusCSV> list = new ArrayList<>();
-		
-		try {
-			Reader reader = Files.newBufferedReader(Paths.get(csvPath));
-			CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<IndiaCensusCSV>(reader);
-			csvToBeanBuilder.withType(IndiaCensusCSV.class);
-			csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-			CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-			Iterator<IndiaCensusCSV> censusCsvIterator = csvToBean.iterator();
-			
-			int count = 1;
-			while(censusCsvIterator.hasNext()) {
-				count++;
-				censusCsvIterator.next();
-			}
-			return count;
-		} catch (IOException e) {
-			if (csvPath.contains(".csv")) {
-                throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.NO_SUCH_FILE);
-            }
-		}
-		return 0;
-		
-	}
+//	public int readData(String csvPath) throws CensusAnalyserException {
+//
+//		List<IndiaCensusCSV> list = new ArrayList<>();
+//		
+//		try {
+//			Reader reader = Files.newBufferedReader(Paths.get(csvPath));
+//			CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<IndiaCensusCSV>(reader);
+//			csvToBeanBuilder.withType(IndiaCensusCSV.class);
+//			csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
+//			CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
+//			Iterator<IndiaCensusCSV> censusCsvIterator = csvToBean.iterator();
+//			
+//			int count = 1;
+//			while(censusCsvIterator.hasNext()) {
+//				count++;
+//				censusCsvIterator.next();
+//			}
+//			return count;
+//		} catch (IOException e) {
+//			if (csvPath.contains(".csv")) {
+//                throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.NO_SUCH_FILE);
+//            }
+//		}
+//		return 0;
+//		
+//	}
 
 }

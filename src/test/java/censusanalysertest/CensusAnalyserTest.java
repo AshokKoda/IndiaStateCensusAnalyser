@@ -28,10 +28,9 @@ public class CensusAnalyserTest {
 	public void csvFileIncorrect() throws IOException {
 		CensusAnalyser censusAnalyser = new CensusAnalyser();
 		try {
-			int numOfRecords = censusAnalyser.readData("D:\\Eclipse Java Projects\\New-Workspace\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData1.csv");
+			int numOfRecords = censusAnalyser.loadCensusData("D:\\Eclipse Java Projects\\New-Workspace\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData1.csv");
 			Assert.assertEquals(29, numOfRecords);
 		} catch (CensusAnalyserException e) {
-			System.out.println(e.getMessage());
 			Assert.assertEquals("NO SUCH FILE", e.getMessage());
 		}
 	}
