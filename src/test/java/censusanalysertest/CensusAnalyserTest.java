@@ -34,4 +34,15 @@ public class CensusAnalyserTest {
 			Assert.assertEquals("NO SUCH FILE", e.getMessage());
 		}
 	}
+	
+	@Test
+	public void incorrectExtensionFile() {
+		CensusAnalyser censusAnalyser = new CensusAnalyser();
+		try {
+			int numOfRecords = censusAnalyser.loadCensusData("D:\\Eclipse Java Projects\\New-Workspace\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData.pdf");
+			Assert.assertEquals(29, numOfRecords);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals("EXTENSION TYPE NOT FOUND", e.getMessage());
+		}
+	}
 }
