@@ -1,5 +1,7 @@
 package censusanalysertest;
 
+import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,6 +21,18 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(29, numOfRecords);
 		} catch (CensusAnalyserException e) {
 			
+		}
+	}
+	
+	@Test
+	public void csvFileIncorrect() throws IOException {
+		CensusAnalyser censusAnalyser = new CensusAnalyser();
+		try {
+			int numOfRecords = censusAnalyser.readData("D:\\Eclipse Java Projects\\New-Workspace\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData1.csv");
+			Assert.assertEquals(29, numOfRecords);
+		} catch (CensusAnalyserException e) {
+			System.out.println(e.getMessage());
+			Assert.assertEquals("NO SUCH FILE", e.getMessage());
 		}
 	}
 }
