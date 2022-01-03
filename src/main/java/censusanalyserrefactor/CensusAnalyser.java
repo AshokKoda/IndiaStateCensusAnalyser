@@ -18,14 +18,18 @@ public class CensusAnalyser {
 
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvPath))) {
 			Iterator<IndiaCensusCSV> censusCsvIterator = getCSVIterator(reader, IndiaCensusCSV.class);
-			Iterable<IndiaCensusCSV> csvIterator = () -> censusCsvIterator;
-			int numOfEntires = (int) StreamSupport.stream(csvIterator.spliterator(), true).count();
-			return numOfEntires;
+			return getCount(censusCsvIterator);
 			
 
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 		}
+	}
+
+	private <E> int getCount(Iterator<E> censusCsvIterator) {
+		Iterable<E> csvIterator = () -> censusCsvIterator;
+		int numOfEntires = (int) StreamSupport.stream(csvIterator.spliterator(), true).count();
+		return numOfEntires;
 	}
 
 	private <E> Iterator getCSVIterator(Reader reader, Class csvClass) {
