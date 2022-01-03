@@ -10,7 +10,6 @@ import java.util.stream.StreamSupport;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import censusanalyser.IndiaCensusCSV;
 import censusanalyser.StateCodes;
 
 public class IndianStateCodes {
@@ -20,9 +19,7 @@ public class IndianStateCodes {
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvPath))) {
 
 			Iterator<StateCodes> censusCsvIterator = getCSVIterator(reader, StateCodes.class);
-			Iterable<StateCodes> csvIterator = () -> censusCsvIterator;
-			int numOfEntires = (int) StreamSupport.stream(csvIterator.spliterator(), true).count();
-			return numOfEntires;
+			return getCount(censusCsvIterator);
 
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(),
@@ -30,6 +27,12 @@ public class IndianStateCodes {
 		}
 	}
 	
+	private <E> int getCount(Iterator<E> censusCsvIterator) {
+		Iterable<E> csvIterator = () -> censusCsvIterator;
+		int numOfEntires = (int) StreamSupport.stream(csvIterator.spliterator(), true).count();
+		return numOfEntires;
+	}
+
 	private <E> Iterator getCSVIterator(Reader reader, Class csvClass) {
 		CsvToBeanBuilder<E> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
 		csvToBeanBuilder.withType(csvClass);
