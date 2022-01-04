@@ -60,4 +60,16 @@ public class CensusAnalyserTest {
 			Assert.assertEquals("Delimiter is missing", e.getMessage());
 		}
 	}
+	
+	//State Census CSV file with incorrect ColumnName
+	@Test
+    public void givenIndiaCensusCSVFile_WhenLoadedWithWrongColumn_ShouldThrowException() {
+		CensusAnalyser censusAnalyser = new CensusAnalyser();
+		try {
+			int numOfRecords = censusAnalyser.loadCensusData("D:\\Eclipse Java Projects\\New-Workspace\\IndianStateCensusAnalyser\\src\\main\\resources\\IndiaStateCensusData2.csv");
+			Assert.assertEquals(29, numOfRecords);
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals("Wrong Column existed", e.getMessage());
+		}
+	}
 }
